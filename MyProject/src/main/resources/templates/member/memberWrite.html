@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>멤버</title>
+
+<!-- css파일을 사용할 경우 링크 설정-->
+<link rel="stylesheet" th:href="@{/css/style.css}"></link>
+
+</head>
+<body>
+	<div class="container">
+		<h2>멤버 등록</h2>
+
+		<form id="frm" name = "frm" method="POST" action="/member/memberInsert" enctype="multipart/form-data">
+			<table class="board_detail">
+				<tr>
+					<td>아이디</td>
+					<td><input type="text" id="memberId" name="memberId"/></td>
+					<td>이메일</td>
+					<td><input type="text" id="email" name="email"/></td>
+				</tr>
+				<tr>
+					<td>사용가능여부</td>
+					<td><input type="text" id="enabled" name="enabled"/></td>
+					<td>이름</td>
+					<td><input type="text" id="name" name="name"/></td>
+				</tr>
+				<tr>
+					<td>비밀번호</td>
+					<td><input type="text" id="pw" name="pw"/></td>
+					<td>직급</td>
+					<td><input type="text" id="role" name="role"/></td>
+				</tr>
+			</table>
+			<input type="file" id="files" name="files" multiple="multiple">			
+			<input type="submit" id="submit" value="등록" class="btn">
+		</form>
+	</div>
+</body>
+</html>

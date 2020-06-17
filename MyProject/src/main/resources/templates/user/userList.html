@@ -1,0 +1,49 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+
+<!-- index.html 고유 CSS 추가 -->
+<th:block layout:fragment="css">
+</th:block>
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+</th:block>
+<div layout:fragment="content">
+
+
+	<div class="container">
+		<h2>사용자 리스트</h2>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>아이디</th>
+					<th>패스워드</th>
+					<th>이름</th>
+					<th>이메일</th>
+					<th>권한</th>
+					<th>가입일</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${#lists.size(list)} > 0" th:each="vo : ${list}">
+					<td><a href="/user/userDetail/" th:attrappend="href=${vo.id}"
+						th:text="${vo.id}"></a></td>
+					<td th:text="${vo.pw}"></td>
+					<td th:text="${vo.name}"></td>
+					<td th:text="${vo.email}"></td>
+					<td th:text="${vo.role}"></td>
+					<td th:text="${vo.joinDate}"></td>
+
+				</tr>
+			</tbody>
+		</table>
+		<button type="button" class="btn btn-warning">
+			<a href="/user/userInsert/">사용자 추가</a>
+		</button>
+		
+	</div>
+
+</div>
+</html>
+

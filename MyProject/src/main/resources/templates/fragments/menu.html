@@ -1,0 +1,34 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<style>
+</style>
+<header th:fragment="menuFragment">
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id = "nav-main">
+		<a class="navbar-brand" href="https://portal.inhatc.ac.kr/user/login.face">Inhatc</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" href="/">처음으로
+						<span class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item"><a class="nav-link" href="/user/userList">사용자리스트</a></li>
+				<li class="nav-item"><a class="nav-link" href="/board/boardList.do">게시판</a></li>
+			</ul>
+			<p id = "title_main">인하공업전문대학 유저 게시판</p>
+			<form class="form-inline my-2 my-lg-0" method="post" action="/board/boardSerach">
+				<input class="btn btn-light" type="Search" name = "title"
+					placeholder="검색어 입력" aria-label="검색어 입력" style="width:300px">
+				<button class="btn btn-info" type="submit">검색</button>
+			</form>
+		</div>
+	</nav>
+
+</header>
+
+</html>

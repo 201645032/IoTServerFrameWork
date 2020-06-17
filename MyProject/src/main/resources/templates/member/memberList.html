@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>멤버</title>
+
+<!-- css파일을 사용할 경우 링크 설정-->
+<link rel="stylesheet" th:href="@{/css/style.css}"></link>
+
+</head>
+<body>
+	<div class="container">
+		<h2>멤버 목록</h2>
+		<table class="board_list">
+			<!-- 각 컬럼의 공간 설정 -->
+			<colgroup>
+				<col width = "15%">
+				<col width = "*">
+				<col width= "15%">
+				<col width= "20%">
+			</colgroup>
+
+			<!-- 헤더 설정 -->
+			<thead>
+				<tr>
+					<th scope="col">아이디</th>
+					<th scope="col">이름</th>
+                    <th scope="col">생성일자</th>
+				</tr>
+			</thead>
+
+			<!-- 데이터 게시 영역 -->
+			<tbody>
+				<!-- 데이터가 있을 경우 리스트 설정 -->
+				<tr th:if="${#lists.size(list)} > 0" th:each="vo :${list}">
+					
+					<!-- 멤버 상세내용을 보기위해 아이디에 하이퍼링크 추가 -->
+					<td><a href="/member/memberDetail?memberId=" th:attrappend="href=${vo.memberId}" 
+						th:text="${vo.memberId}"></a></td>
+                    <td th:text="${vo.name}"></td>
+					<td th:text="${vo.joinDate}"></td>
+				</tr>
+
+				<!-- 데이터가 없을 경우 리스트 설정 -->
+				<tr th:unless="${#lists.size(list)} > 0">
+					<td colspan="4">조회된 결과가 없습니다.</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<!-- 멤버등록 버튼 설정-->
+		<a href="/member/memberWrite">등록</a>
+	</div>
+</body>
+</html>

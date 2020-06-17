@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang ="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>게시판 상세</title>
+<link rel = "stylesheet" th:href="@{/style.css}"></link>
+</head>
+<body>
+	<div class="container">
+		<h2>사용자 등록</h2>
+		
+		<form id = "frm" name="frm" method="post" th:action="'/user/userUpdate/'+ ${user.id}">
+			<table class = "board_detail">
+				<tr>
+					<td>아이디</td>
+					<td><input type = "text" id = "id" name="id" th:value = "${user.id}" disabled="disabled"/></td>
+				</tr>
+				<tr>
+					<td>패스워드</td>
+					<td><input type = "text" id = "pw" name="pw" th:value = "${user.pw}"/></td>
+				</tr>
+				<tr>
+					<td>이름</td>
+					<td><input type = "text" id = "name" name="name" th:value = "${user.name}"/></td>
+				</tr>
+				<tr>
+					<td>이메일</td>
+					<td><input type = "text" id = "email" name="email" th:value = "${user.email}"/></td>
+				</tr>
+				<tr>
+					<td>권한</td>
+					<td><input type = "text" id = "role" name="role" th:value = "${user.role}"/></td>
+				</tr>
+				
+			</table>
+			<input type = "submit" id = "submit" value="수정" class = "btn">
+			<button>
+				<a href="/user/userDelete/"th:attrappend="href=${user.id}">삭제</a>
+			</button>
+			<button>
+				<a href="/user/userList">리스트</a>
+			</button>
+		</form>
+	</div>
+</body>
+</html>

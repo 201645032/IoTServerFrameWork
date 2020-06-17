@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>멤버</title>
+
+<!-- css파일을 사용할 경우 링크 설정-->
+<link rel="stylesheet" th:href="@{/css/style.css}"></link>
+
+</head>
+<body>
+	<div class="container">
+		<h2>멤버 상세 정보</h2>
+
+		<form id="frm" name = "frm" method="POST">
+			<table class="board_detail">
+				<!-- 각 컬럼의 공간 설정 -->
+				<colgroup>
+					<col width = "15%">
+					<col width = "*">
+					<col width= "15%">
+					<col width= "20%">
+				</colgroup>
+				<caption>멤버 등록정보 확인</caption>
+
+				<!-- 게시글 정보 및 내용 -->
+				<tbody>
+					<tr>
+						<th scope="row">멤버아이디</th>
+						<td>
+							<input title="멤버번호" id="memberId" name="memberId" th:value="${member.memberId}"></input>
+						</td>
+						<th scope="row">이메일</th>
+						<td>
+							<input title="이메일" id="email" name="email" th:value="${member.email}"></input>
+						</td>
+						<th scope="row">가입날짜</th>
+						<td>
+							<input title="가입날짜" id="joinDate" name="joinDate" th:value="${member.joinDate}"></input>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">사용가능여부</th>
+						<td>
+							<input title="사용가능여부 " id="enabled" name="enabled" th:value="${member.enabled}"></input>
+						</td>
+						<th scope="row">이름</th>
+						<td>
+							<input title="이름 " id="name" name="name" th:value="${member.name}"></input>
+						</td>
+						<th scope="row">비밀번호</th>			
+						<td>
+							<input title="비밀번호 " id="pw" name="pw" th:value="${member.pw}"></input>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">직급</th>
+						<td>
+							<input title="직급 " id="role" name="role" th:value="${member.role}"></input>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<!-- 아이디는 DB로 직접 불러온게 아니라 전달받은 값을 이용한 값이므로 따로 전달해야된다. -->
+			<input type="hidden" name="memberId" th:value="${member.memberId}">
+		</form>
+		
+		<!-- 파일 리스트 출력 -->
+		<div class="file_list">
+			<a th:each="file : ${member.fileList}" 
+				th:href="@{/member/downloadMemberFile(idx=${file.idx}, memberIdx=${file.memberId})}"
+				th:text="|${file.originalFileName}(${file.fileSize}kb)|"></a>
+			
+		</div>
+		<img th:each="file : ${member.fileList}" th:src="${file.storedFilePath}"/>
+		<div>
+			
+		</div>
+		
+		<!-- 기능 버튼 -->
+		<input type="button" id="list" value="목록으로" class="btn">
+		<input type="button" id="edit" value="수정하기" class="btn">
+		<input type="button" id="delete" value="삭제하기" class="btn">
+	</div>
+
+	<!-- 스크립트를 사용하기 위해 소스 주소 설정 및 스크립트 설정-->
+	<script src="http://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+	crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			// 목록으로 버튼 클릭시 memberList기능 수행
+			$("#list").on("click", function(){
+				location.href = "/member/memberList"
+			});
+
+			// 수정하기 버튼 클릭시 memberUpdate기능 수행
+			// 폼을 전달할 때, action 기능을 통해 대상 주소 설정
+			$("#edit").on("click", function(){
+				var frm = $("#frm")[0];
+				frm.action = "/member/memberUpdate"
+				frm.submit()
+			});
+
+			// 삭제하기 버튼 클릭시 memberDelete기능 수행
+			// 폼을 전달할 때, action 기능을 통해 대상 주소 설정
+			$("#delete").on("click", function(){
+				var frm = $("#frm")[0];
+				frm.action = "/member/memberDelete"
+				frm.submit()
+			});
+		});
+	</script>
+
+</body>
+</html>
