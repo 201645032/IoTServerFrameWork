@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<style>
+.my_footer {
+	padding: 50px;
+}
+
+
+</style>
+<footer th:fragment="footerFragment">
+
+    <div class = "my_footer" style="border: 1px solid gold">
+        Footer영역입니다....
+    </div>
+
+</footer>
+
+</html>

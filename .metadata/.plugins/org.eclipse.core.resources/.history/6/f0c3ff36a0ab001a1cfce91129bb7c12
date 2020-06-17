@@ -1,0 +1,14 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<footer th:fragment="footerFragment">
+
+    <div class = "my_footer">
+    	<p>인하공업전문대학 컴퓨터시스템과 링크반 IoT서버 프레임워크 프로젝트</p>
+    	<br/>
+        <p>Copyright 2020. 정찬영 all rights reserved.</p>
+    </div>
+
+</footer>
+
+</html>

@@ -1,0 +1,34 @@
+<html lagn="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<style>
+footer {
+position: absolute;
+bottom: 0;
+left: 0;
+right: 0;
+text-align:center;
+}
+
+#navbarSupportedContent{
+	font-size:20px;
+	color:white;
+}
+
+#nav-main{
+font-style:bold;
+}
+
+#title_main{
+
+margin-right: 250px; 
+font-weight: bold;
+}
+</style>
+
+<head th:replace="fragments/config :: configFragment"></head>
+
+<header th:replace="fragments/menu :: menuFragment"></header>
+
+<div layout:fragment="content"></div>
+
+<footer th:replace="fragments/footer :: footerFragment"></footer>
+</html>

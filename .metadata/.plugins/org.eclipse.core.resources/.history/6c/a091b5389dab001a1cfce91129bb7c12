@@ -1,0 +1,24 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block layout:fragment="css">
+</th:block>
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+</th:block>
+<style>
+.my_footer{
+	font-size: 50px:
+	
+}
+
+
+</style>
+<footer th:fragment="footerFragment">
+
+    <div class = "my_footer">
+        <p>푸터영역</p>
+    </div>
+
+</footer>
+
+</html>

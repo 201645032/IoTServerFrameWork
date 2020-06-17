@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<style>
+footer {
+   width:100%;
+   height:100px;
+   position:absolute;
+   bottom:0;
+   background:#5eaeff;
+   text-align: center;
+   color: white;
+}
+
+</style>
+
+<footer th:fragment="footerFragment">
+
+    <div class = "my_footer" style="border: 1px solid yellow">
+        <p>푸터영역</p>
+    </div>
+
+</footer>
+
+</html>

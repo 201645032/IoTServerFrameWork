@@ -1,0 +1,16 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<style>
+footer{
+font-size: 50px;
+}
+</style>
+<footer th:fragment="footerFragment">
+
+    <div class = "my_footer">
+        <p>푸터영역</p>
+    </div>
+
+</footer>
+
+</html>

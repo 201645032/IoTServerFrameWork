@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.inhatc.spring.board.mapper.BoardMapper">
+
+<select id="boardSerach" parameterType="String" resultType="kr.inhatc.spring.board.dto.BoardDto">
+	SELECT board_idx, title, hit_cnt, 
+	TO_CHAR(create_datetime, 'YYYY-MM-DD') AS created_datetime
+	FROM T_BOARD
+	WHERE board_idx IN (SELECT board_idx FROM T_BOARD WHERE title LIKE %#{title}% OR contents  LIKE %#{contents}%)
+	ORDER BY board_idx DESC
+</select>
+
+
+<select id="boardList" resultType="kr.inhatc.spring.board.dto.BoardDto">
+	SELECT board_idx, title, hit_cnt, 
+	TO_CHAR(create_datetime, 'YYYY-MM-DD') AS created_datetime
+	FROM T_BOARD
+	WHERE delete_yn = 'N'
+	ORDER BY board_idx DESC
+</select>
+<insert id="boardInsert" parameterType="kr.inhatc.spring.board.dto.BoardDto">
+	<!-- 시퀀스 값 가져오기 -->
+	<selectKey keyProperty="boardIdx" resultType="int" order = "BEFORE">
+		SELECT board_seq.nextval FROM DUAL
+	</selectKey>
+
+	INSERT INTO t_board (board_idx, title, contents, create_datetime, creator_id)
+	VALUES (#{boardIdx}, #{title},  #{contents}, sysdate, 'admin')
+</insert>
+
+<select id = "boardDetail" parameterType="int" resultType="kr.inhatc.spring.board.dto.BoardDto">
+	SELECT board_idx, title, contents, hit_cnt, 
+	TO_CHAR(create_datetime, 'YYYY-MM-DD') AS created_datetime, creator_id
+	FROM T_BOARD
+	WHERE delete_yn = 'N' AND board_idx = #{boardIdx}
+</select>
+
+<update id="boardUpdate" parameterType="kr.inhatc.spring.board.dto.BoardDto">
+UPDATE t_board
+SET title = #{title},
+	contents = #{contents},
+	create_datetime= sysdate,
+	creator_id = 'admin'
+WHERE board_idx = #{boardIdx}
+</update>
+
+<update id = "updateHit" parameterType="int">
+	UPDATE t_board
+	SET hit_cnt = hit_cnt + 1
+	WHERE board_idx = #{boardIdx}
+</update>
+
+<delete id="boardDelete" parameterType="int">
+	DELETE FROM t_board
+	WHERE board_idx = #{boardIdx}
+</delete>
+
+
+<insert id="boardFileInsert" parameterType="kr.inhatc.spring.board.dto.FileDto">
+	INSERT INTO t_file(
+		IDX, BOARD_IDX, ORIGINAL_FILE_NAME, STORED_FILE_PATH, FILE_SIZE, CREATER_ID, CREATE_DATETIME
+	)
+	SELECT file_seq.nextval, A. * FROM(
+	<foreach item = "item" collection = "list" separator = "UNION ALL">
+		SELECT #{item.boardIdx} as board_idx,
+				#{item.originalFileName} as original_file_name,
+				#{item.storedFilePath} as stored_file_path,
+				#{item.fileSize} as filel_size,
+				'admin',
+				sysdate
+				FROM DUAL
+	</foreach>) A
+	
+</insert>
+
+<select id = "selectBoardFileList" parameterType="int" resultType="kr.inhatc.spring.board.dto.FileDto">
+	SELECT idx, board_idx, original_file_name, ROUND(file_size/1024) as file_size
+	FROM t_file
+	WHERE board_idx = #{boardIdx} AND deleted_yn = 'N'
+
+</select>
+
+    <select id="selectFileInfo" parameterType="map" resultType="kr.inhatc.spring.board.dto.FileDto">
+    	SELECT original_file_name, stored_file_path, file_size
+    	FROM T_FILE
+    	WHERE idx = #{idx} AND board_idx = #{boardIdx} AND deleted_yn = 'N'
+    </select>
+
+</mapper>

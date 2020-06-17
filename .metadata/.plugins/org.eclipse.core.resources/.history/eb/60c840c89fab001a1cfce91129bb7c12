@@ -1,0 +1,12 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<footer th:fragment="footerFragment">
+
+    <div class = "my_footer">
+        <p>인하공업전문대학 링크반 프로젝트</p>
+    </div>
+
+</footer>
+
+</html>

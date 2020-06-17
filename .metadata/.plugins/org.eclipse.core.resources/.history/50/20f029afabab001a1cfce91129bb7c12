@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+
+<meta charset="UTF-8">
+<title>게시판 작성</title>
+
+</head>
+<body>
+	<div class="container">
+		<h2>게시판 작성</h2>
+		
+		<form id = "frm" name="frm" method="post" action="/board/boardInsert" enctype="multipart/form-data">
+			<table class = "board_detail">
+				<tr>
+					<td>제목</td>
+					<td><input type = "text" id = "title" name="title" /></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<textarea id = "contents" name = "contents"></textarea>
+					</td>
+				</tr>
+			</table>
+			<input type = "file" id = "files" name = "files" multiple="multiple">
+			<input type = "submit" id = "submit" value="저장" class = "btn">
+		</form>
+	</div>
+</body>
+</html>

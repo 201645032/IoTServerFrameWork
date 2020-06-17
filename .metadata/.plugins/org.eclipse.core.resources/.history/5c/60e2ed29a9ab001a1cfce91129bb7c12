@@ -1,0 +1,12 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<footer th:fragment="footerFragment">
+
+    <div class = "my_footer">
+        <p>Copyright 2020. 정찬영 all rights reserved.</p>
+    </div>
+
+</footer>
+
+</html>

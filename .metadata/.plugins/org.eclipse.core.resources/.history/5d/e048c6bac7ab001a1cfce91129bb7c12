@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<!-- index.html 고유 CSS 추가 -->
+<th:block layout:fragment="css">
+
+</th:block>
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+</th:block>
+
+<div layout:fragment="content">
+
+    <div class = "main">
+        <h2>인하공업전문대학 IoT서버프레임워크 프로젝트 페이지입니다.</h2>
+        <hr>
+		<div class="jumbotron">
+			<h1>인하공전 유저 게시판에 오신 것을 환영합니다.</h1>
+			<p>인하공업전문대학 학생이라면 누구나 간단한 정보 등록 후 게시판을 이용할 수 있습니다.</p>
+			<p>
+				<a id = "btn2" class="btn btn-primary btn-lg btn-dark" href="/user/userInsert/" role="button">정보 등록하기</a>
+			</p>
+		</div>
+	</div>
+
+</div>
+</html>

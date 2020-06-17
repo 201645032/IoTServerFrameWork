@@ -1,0 +1,91 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+<meta charset="UTF-8">
+<head>
+<title>게시판 상세</title>
+
+</head>
+<!-- index.html 고유 CSS 추가 -->
+<th:block layout:fragment="css">
+</th:block>
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+</th:block>
+<div layout:fragment="content">
+<div class="container">
+		<h2>게시판 상세</h2>
+		
+		<form id = "frm" name="frm" method="post" action="/board/boardUpdate">
+			<table class = "board_detail">
+				<colgroup>
+					<col width = "15%" />
+					<col width = "35%" />
+					<col width = "15%" />
+					<col width = "35%" />
+				</colgroup>
+				<caption>게시글 상세 내용</caption>
+				<tbody>
+					<tr>
+						<th scope="row">글번호</th>
+						<td th:text="${board.boardIdx}"></td>
+						<th scope="row">조회수</th>
+						<td th:text="${board.hitCnt}"></td>
+					</tr>				
+					<tr>
+						<th scope="row">작성자</th>
+						<td th:text="${board.creatorId}"></td>
+						<th scope="row">작성일</th>
+						<td th:text="${board.createdDatetime}"></td>
+					</tr>
+					<tr>
+						<th scope="row">제목</th>
+						<td colspan="3">
+							<input type="text" id = "title" name = "title" th:value="${board.title}"> 
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4" class="view_text">
+							<textarea title="내용" id = "contents" name="contents" th:text="${board.contents}"></textarea>
+					</tr>								
+				</tbody>
+			</table>
+			<input type = "hidden" name = "boardIdx" th:value="${board.boardIdx}">
+			<input type = "button" id = "list" value="목록으로" class = "btn">
+			<input type = "button" id = "edit" value="수정하기" class = "btn">
+			<input type = "button" id = "delete" value="삭제하기" class = "btn">
+		</form>
+		<div class="file_list">
+			<a th:each="file : ${board.fileList}"
+				th:href="@{/board/downloadBoardFile(idx=${file.idx},boardIdx=${file.boardIdx})}"
+				th:text="|${file.originalFileName}(${file.fileSize}kb)|"></a>
+		</div>
+	</div>
+	</div>
+	<script src= "http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#list").on("click", function(){
+				location.href = "/board/boardList.do"
+			});
+			
+			
+			$("#edit").on("click", function(){
+				var frm = $("#frm")[0];
+				frm.action = "/board/boardUpdate"
+				frm.submit()
+		"C:/Users/usamo/Desktop/Discord.lnk"	});
+			
+			$("#delete").on("click", function(){
+				var frm = $("#frm")[0];
+				frm.action = "/board/boardDelete"
+				frm.submit()
+			});
+			
+		});
+		
+	
+	</script>
+
+</html>
